@@ -1,0 +1,11 @@
+def count_word_and_letter(filename, word, letter):
+    word_count = 0
+    letter_count = 0
+    with open(filename, 'r') as file:
+        for line in file:
+            words = line.split()
+            word_count += words.count(word)
+            letter_count += sum(1 for char in line if char == letter)
+    print(f"Occurrences of the word '{word}': {word_count}")
+    print(f"Occurrences of the letter '{letter}': {letter_count}")
+count_word_and_letter("source.txt", "example", "e")
