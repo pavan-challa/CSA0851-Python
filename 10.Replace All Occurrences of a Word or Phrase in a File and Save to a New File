@@ -1,0 +1,8 @@
+def replace_word_in_file(source_filename, target_filename, old_word, new_word):
+    with open(source_filename, 'r') as file:
+        content = file.read()
+    modified_content = content.replace(old_word, new_word)
+    with open(target_filename, 'w') as file:
+        file.write(modified_content)
+    print(f"Replaced '{old_word}' with '{new_word}' and saved to '{target_filename}'")
+replace_word_in_file("source.txt", "modified_source.txt", "oldWord", "newWord")
