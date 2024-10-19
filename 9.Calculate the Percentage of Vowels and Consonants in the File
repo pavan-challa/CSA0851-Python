@@ -1,0 +1,22 @@
+def calculate_vowel_consonant_percentage(filename):
+    vowels = 'aeiouAEIOU'
+    vowel_count = 0
+    consonant_count = 0
+    total_letters = 0
+    with open(filename, 'r') as file:
+        for line in file:
+            for char in line:
+                if char.isalpha():
+                    total_letters += 1
+                    if char in vowels:
+                        vowel_count += 1
+                    else:
+                        consonant_count += 1
+    if total_letters == 0:
+        print("No letters found in the file.")
+        return
+    vowel_percentage = (vowel_count / total_letters) * 100
+    consonant_percentage = (consonant_count / total_letters) * 100
+    print(f"Vowels: {vowel_percentage:.2f}%")
+    print(f"Consonants: {consonant_percentage:.2f}%")
+calculate_vowel_consonant_percentage("source.txt")
