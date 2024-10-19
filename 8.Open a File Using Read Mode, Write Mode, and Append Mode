@@ -1,0 +1,10 @@
+def file_modes_example(filename):
+    with open(filename, 'r') as file:
+        content = file.read()
+        print("Read Mode Content:")
+        print(content)
+    with open(filename, 'w') as file:
+        file.write("This is a new line written in write mode.\n")
+    with open(filename, 'a') as file:
+        file.write("This line is added using append mode.\n")
+file_modes_example("source.txt")
