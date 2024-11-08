@@ -1,0 +1,9 @@
+p=int(input("ENter amount"))
+n=int(input("enter years"))
+a=int(input("enter age"))
+if(a >=49):
+    r=12/100 * p
+else:
+    r=10/100 * p
+i=r * 12*n
+print(i)
