@@ -1,0 +1,7 @@
+a=str(input("Enter sentence : "))
+sentences=a.split(". ")
+count=0
+for sentence in sentences:
+    if sentence.startswith("B"):
+        count+=1
+print(count)
