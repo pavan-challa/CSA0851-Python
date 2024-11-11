@@ -1,0 +1,72 @@
+import random
+import datetime
+def collect_data():
+    appliances = ['Refrigerator', 'Heating', 'Lights', 'Air Conditioner', 'Washing Machine']
+    data = []
+    current_time = datetime.datetime.now()
+    for appliance in appliances:
+        consumption = round(random.uniform(0.1, 2.0), 2)
+        data.append({
+            'appliance': appliance,
+            'timestamp': current_time,
+            'consumption': consumption
+        })
+    return data
+def track_usage(data, threshold=1.5):
+    excessive_usage_alerts = []
+    for entry in data:
+        if entry['consumption'] > threshold:
+            alert = f"Alert! High consumption detected on {entry['appliance']} at {entry['timestamp']}"
+            excessive_usage_alerts.append(alert)
+    return excessive_usage_alerts
+def provide_recommendations(data):
+    recommendations = []
+    consumption_by_appliance = {}
+    for entry in data:
+        appliance = entry['appliance']
+        consumption = entry['consumption']
+        if appliance not in consumption_by_appliance:
+            consumption_by_appliance[appliance] = 0
+        consumption_by_appliance[appliance] += consumption
+    max_appliance = max(consumption_by_appliance, key=consumption_by_appliance.get)
+    recommendations.append(f"Consider reducing usage of {max_appliance} as it consumes the most energy.")
+    return recommendations
+import matplotlib.pyplot as plt
+def plot_consumption_trends(data):
+    timestamps = [entry['timestamp'] for entry in data]
+    consumption_values = [entry['consumption'] for entry in data]
+    plt.figure(figsize=(10, 5))
+    plt.plot(timestamps, consumption_values, label="Total Consumption")
+    plt.xlabel("Time")
+    plt.ylabel("Energy Consumption (kWh)")
+    plt.title("Energy Consumption Over Time")
+    plt.legend()
+    plt.show()
+def plot_appliance_comparison(data):
+    consumption_by_appliance = {}
+    for entry in data:
+        appliance = entry['appliance']
+        consumption = entry['consumption']
+        if appliance not in consumption_by_appliance:
+            consumption_by_appliance[appliance] = 0
+        consumption_by_appliance[appliance] += consumption
+    appliances = list(consumption_by_appliance.keys())
+    total_consumptions = list(consumption_by_appliance.values())
+    plt.figure(figsize=(10, 5))
+    plt.bar(appliances, total_consumptions)
+    plt.xlabel("Appliance")
+    plt.ylabel("Total Energy Consumption (kWh)")
+    plt.title("Total Energy Consumption by Appliance")
+    plt.show()
+def main():
+    data = collect_data()
+    alerts = track_usage(data)
+    for alert in alerts:
+        print(alert)
+    recommendations = provide_recommendations(data)
+    for recommendation in recommendations:
+        print(recommendation)  
+    plot_consumption_trends(data)
+    plot_appliance_comparison(data)
+if __name__ == "__main__":
+    main()
