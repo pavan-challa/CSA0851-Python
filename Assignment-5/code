@@ -1,0 +1,30 @@
+conversion_factors = {
+    ("km", "miles"): 0.621371,
+    ("miles", "km"): 1.60934,
+    ("m", "ft"): 3.28084,
+    ("ft", "m"): 0.3048,
+    ("cm", "inches"): 0.393701,
+    ("inches", "cm"): 2.54
+}
+
+def convert_distance(value, from_unit, to_unit):
+    """Converts the distance from one unit to another based on conversion factors."""
+    if (from_unit, to_unit) in conversion_factors:
+        factor = conversion_factors[(from_unit, to_unit)]
+        return value * factor
+    elif (to_unit, from_unit) in conversion_factors:
+        factor = conversion_factors[(to_unit, from_unit)]
+        return value / factor
+    else:
+        print(f"Conversion from {from_unit} to {to_unit} is not supported.")
+        return None
+def distance_converter_interface():
+    print("Distance Converter")
+    print("Supported units: km, miles, m, ft, cm, inches")
+    value = float(input("Enter the value to convert: "))
+    from_unit = input("Enter the unit to convert from: ")
+    to_unit = input("Enter the unit to convert to: ")
+    result = convert_distance(value, from_unit, to_unit)
+    if result is not None:
+        print(f"{value} {from_unit} is equal to {result:.2f} {to_unit}")
+distance_converter_interface()
