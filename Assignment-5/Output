@@ -1,0 +1,6 @@
+Distance Converter
+Supported units: km, miles, m, ft, cm, inches
+Enter the value to convert: 50.0
+Enter the unit to convert from: m
+Enter the unit to convert to: ft
+50.0 m is equal to 164.04 ft
