@@ -1,0 +1,52 @@
+products = {}
+def add_product(name, price, quantity):
+    """Adds a new product to the inventory."""
+    if name in products:
+        print(f"Product '{name}' already exists. Use update_product to modify it.")
+    else:
+        products[name] = {'price': price, 'quantity': quantity}
+        print(f"Product '{name}' added.")
+def update_product(name, price=None, quantity=None):
+    """Updates an existing product's price or quantity."""
+    if name in products:
+        if price is not None:
+            products[name]['price'] = price
+        if quantity is not None:
+            products[name]['quantity'] = quantity
+        print(f"Product '{name}' updated.")
+    else:
+        print(f"Product '{name}' does not exist.")
+def remove_product(name):
+    """Removes a product from the inventory."""
+    if name in products:
+        del products[name]
+        print(f"Product '{name}' removed.")
+    else:
+        print(f"Product '{name}' does not exist.")
+def calculate_total_value():
+    """Calculates the total value of products in stock."""
+    total_value = sum(details['price'] * details['quantity'] for details in products.values())
+    return total_value
+def sort_products_by_price():
+    """Returns a list of products sorted by price in descending order."""
+    sorted_products = sorted(products.items(), key=lambda item: item[1]['price'], reverse=True)
+    return sorted_products
+add_product("Laptop", 1000, 5)
+add_product("Smartphone", 800, 10)
+add_product("Tablet", 500, 15)
+update_product("Smartphone", quantity=12)
+remove_product("Tablet")
+print("\nInventory:")
+for name, details in products.items():
+    print(f"Product: {name}, Price: {details['price']}, Quantity: {details['quantity']}")
+total_value = calculate_total_value()
+print(f"\nTotal value of products in stock: ${total_value}")
+sorted_products = sort_products_by_price()
+print("\nProducts sorted by price (descending):")
+for name, details in sorted_products:
+    print(f"Product: {name}, Price: {details['price']}, Quantity: {details['quantity']}")
+product_alias = products  
+product_alias["Laptop"]["price"] = 1100
+print("\nUpdated Inventory after aliasing effect:")
+for name, details in products.items():
+    print(f"Product: {name}, Price: {details['price']}, Quantity: {details['quantity']}")
